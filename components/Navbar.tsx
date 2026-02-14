@@ -24,6 +24,42 @@ export default function Navbar() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    // Scroll Spy Logic
+    useEffect(() => {
+        const sections = navLinks.map(link => document.querySelector(link.href));
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.3 // Trigger when 30% of section is visible
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    // Remove # from href to get ID
+                    const id = entry.target.getAttribute('id');
+                    if (id) {
+                        // Use history.replaceState to update URL without jumping, optional
+                        // But for now just visually highlighting
+                        const activeLink = document.querySelector(`a[href="#${id}"]`);
+                        document.querySelectorAll('nav a').forEach(a => a.classList.remove('text-white', 'font-bold'));
+                        activeLink?.classList.add('text-white', 'font-bold');
+                    }
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            if (section) observer.observe(section);
+        });
+
+        return () => {
+            sections.forEach(section => {
+                if (section) observer.unobserve(section);
+            });
+        };
+    }, []);
+
     return (
         <header
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-black/80 backdrop-blur-md py-4' : 'bg-transparent py-6'
@@ -40,7 +76,9 @@ export default function Navbar() {
                         <a
                             key={link.name}
                             href={link.href}
-                            className="text-sm font-medium text-gray-300 hover:text-white transition-colors relative group"
+                            // Using a data attribute or class manipulation via Observer for active state is cleaner
+                            // But for simplicity with the Observer below, we'll let direct DOM manipulation handle the active class
+                            className="text-sm font-medium text-gray-300 hover:text-white transition-colors relative group nav-link"
                         >
                             {link.name}
                             <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full" />

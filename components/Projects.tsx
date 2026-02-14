@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 const projects = [
     {
@@ -9,7 +10,8 @@ const projects = [
         category: "Full Stack",
         year: "2025",
         tech: ["Flask", "PostgreSQL", "React", "Tailwind"],
-        description: "Built full-stack hotel booking system with JWT auth, Google OAuth, and OTP email verification. Implemented admin CRUD for rooms, Razorpay integration, filtered listings, and secure booking confirmation."
+        description: "Built full-stack hotel booking system with JWT auth, Google OAuth, and OTP email verification. Implemented admin CRUD for rooms, Razorpay integration, filtered listings, and secure booking confirmation.",
+        link: "#"
     },
     {
         id: 2,
@@ -17,7 +19,8 @@ const projects = [
         category: "Full Stack",
         year: "2025",
         tech: ["Django REST", "React", "PostgreSQL", "Bootstrap"],
-        description: "Developed social media platform with JWT login/logout, OTP-based signup/reset, and email verification. Implemented post CRUD operations with tags, timestamps, and protected routes."
+        description: "Developed social media platform with JWT login/logout, OTP-based signup/reset, and email verification. Implemented post CRUD operations with tags, timestamps, and protected routes.",
+        link: "#"
     },
     {
         id: 3,
@@ -25,7 +28,8 @@ const projects = [
         category: "Automation",
         year: "2025",
         tech: ["Playwright", "Python", "Pandas"],
-        description: "Scraped election data (name, gender, phone) from Bihar Election website. Automated downloads of affidavits/photos and saved structured data into CSV."
+        description: "Scraped election data (name, gender, phone) from Bihar Election website. Automated downloads of affidavits/photos and saved structured data into CSV.",
+        link: "#"
     },
     {
         id: 4,
@@ -33,7 +37,8 @@ const projects = [
         category: "Database Management",
         year: "2025",
         tech: ["Flask", "MySQL", "HTML/CSS/JS"],
-        description: "Built inventory management system using Flask, SQLAlchemy, and MySQL. Designed frontend with Bootstrap and served endpoints through Flask routes."
+        description: "Built inventory management system using Flask, SQLAlchemy, and MySQL. Designed frontend with Bootstrap and served endpoints through Flask routes.",
+        link: "#"
     },
     {
         id: 5,
@@ -41,7 +46,8 @@ const projects = [
         category: "Web Development",
         year: "2024",
         tech: ["HTML", "CSS", "JavaScript"],
-        description: "Created site to publish team schedules, match results, and athlete profiles."
+        description: "Created site to publish team schedules, match results, and athlete profiles.",
+        link: "#"
     }
 ];
 
@@ -86,9 +92,11 @@ export default function Projects() {
                                 </div>
 
                                 <div className="md:w-1/3 flex flex-col items-start md:items-end gap-4 mt-6 md:mt-0">
-                                    <button className="px-6 py-2 bg-white text-black font-medium rounded-full hover:bg-gray-200 transition-colors">
-                                        View Project
-                                    </button>
+                                    <Link href={project.link} target="_blank" rel="noopener noreferrer">
+                                        <button className="px-6 py-2 bg-white text-black font-medium rounded-full hover:bg-gray-200 transition-colors cursor-pointer">
+                                            View Project
+                                        </button>
+                                    </Link>
                                 </div>
                             </div>
                         </motion.div>

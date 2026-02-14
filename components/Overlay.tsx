@@ -24,10 +24,10 @@ export default function Overlay({ scrollYProgress }: OverlayProps) {
             {/* Section 1 */}
             <motion.div style={{ y: y1, opacity: opacity1 }} className="absolute text-center">
                 <h1 className="text-6xl md:text-9xl font-bold tracking-tighter">
-                    Panka
+                    PANKAJ
                 </h1>
                 <p className="text-xl md:text-2xl mt-4 font-light tracking-widest uppercase opacity-80">
-                    Creative Developer
+                    Python Developer
                 </p>
             </motion.div>
 
