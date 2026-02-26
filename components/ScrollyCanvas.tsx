@@ -26,7 +26,7 @@ export default function ScrollyCanvas() {
                 const promise = new Promise<void>((resolve) => {
                     const img = new Image();
                     const threeDigitIndex = i.toString().padStart(3, '0');
-                    img.src = `/sequence/${threeDigitIndex}.webp`;
+                    img.src = `/sequence/${threeDigitIndex}.png`;
                     img.onload = () => {
                         loadedImages[i] = img;
                         resolve();
@@ -109,15 +109,15 @@ export default function ScrollyCanvas() {
 
     return (
         <div ref={containerRef} className="h-[500vh] relative">
-            <div className="sticky top-0 h-screen w-full overflow-hidden bg-black">
+            <div className="sticky top-0 h-screen w-full overflow-hidden bg-background">
                 <canvas
                     ref={canvasRef}
                     className="block w-full h-full object-cover"
                 />
                 <Overlay scrollYProgress={scrollYProgress} />
                 {!isLoaded && (
-                    <div className="absolute inset-0 flex items-center justify-center text-white z-20 bg-black">
-                        <span className="font-mono text-sm animate-pulse">LOADING SEQUENCE...</span>
+                    <div className="absolute inset-0 flex items-center justify-center z-20 bg-background">
+                        <span className="font-mono text-sm animate-pulse gradient-text">LOADING SEQUENCE...</span>
                     </div>
                 )}
             </div>

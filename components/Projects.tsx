@@ -2,58 +2,53 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
 
 const projects = [
     {
         id: 1,
-        title: "Hotel Website Project",
+        title: "Hotel Booking System",
         category: "Full Stack",
-        year: "2025",
-        tech: ["Flask", "PostgreSQL", "React", "Tailwind"],
-        description: "Built full-stack hotel booking system with JWT auth, Google OAuth, and OTP email verification. Implemented admin CRUD for rooms, Razorpay integration, filtered listings, and secure booking confirmation.",
-        link: "#"
+        year: "July 2025",
+        tech: ["React", "Tailwind", "Flask", "PostgreSQL"],
+        description: "Built a full-stack platform featuring Google OAuth, OTP verification, and secure payment processing via Razorpay. Developed a comprehensive admin panel for room management, bookings, and filtered listings.",
+        link: "https://github.com/PankajV91505/Hotel-Website"
     },
     {
         id: 2,
         title: "Social Media Web App",
         category: "Full Stack",
-        year: "2025",
-        tech: ["Django REST", "React", "PostgreSQL", "Bootstrap"],
-        description: "Developed social media platform with JWT login/logout, OTP-based signup/reset, and email verification. Implemented post CRUD operations with tags, timestamps, and protected routes.",
-        link: "#"
+        year: "June 2025",
+        tech: ["React", "Django REST", "PostgreSQL"],
+        description: "Created a dynamic social platform with protected routes, JWT-based authentication, and OTP password recovery. Engineered CRUD functionality for posts with timestamping and tagging, utilizing Axios for global state management.",
+        link: "https://github.com/PankajV91505/Social-Media-Django"
     },
     {
         id: 3,
-        title: "Playwright Scraper",
+        title: "Automated Election Scraper",
         category: "Automation",
-        year: "2025",
+        year: "April 2025",
         tech: ["Playwright", "Python", "Pandas"],
-        description: "Scraped election data (name, gender, phone) from Bihar Election website. Automated downloads of affidavits/photos and saved structured data into CSV.",
-        link: "#"
+        description: "Automated the extraction of structured demographic data and media files from government portals, compiling results into clean CSV datasets.",
+        link: "https://github.com/PankajV91505/PlayWright_Project"
     },
     {
         id: 4,
-        title: "Grocery Store Management System",
+        title: "Inventory Management System",
         category: "Database Management",
-        year: "2025",
-        tech: ["Flask", "MySQL", "HTML/CSS/JS"],
-        description: "Built inventory management system using Flask, SQLAlchemy, and MySQL. Designed frontend with Bootstrap and served endpoints through Flask routes.",
-        link: "#"
-    },
-    {
-        id: 5,
-        title: "College Sports Website",
-        category: "Web Development",
-        year: "2024",
-        tech: ["HTML", "CSS", "JavaScript"],
-        description: "Created site to publish team schedules, match results, and athlete profiles.",
-        link: "#"
+        year: "Feb 2025",
+        tech: ["Flask", "MySQL", "SQLAlchemy"],
+        description: "Developed an end-to-end inventory tracker with dynamic routing and database relationship mapping.",
+        link: "https://github.com/PankajV91505/Grocery_Store_System"
     }
 ];
 
 export default function Projects() {
     return (
-        <section id="projects" className="min-h-screen bg-black text-white py-24 px-6 md:px-12">
+        <section id="projects" className="min-h-screen py-16 sm:py-20 md:py-24 px-4 sm:px-6 md:px-12 bg-background">
             <motion.div
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -61,44 +56,54 @@ export default function Projects() {
                 viewport={{ once: true }}
                 className="max-w-7xl mx-auto"
             >
-                <h2 className="text-4xl md:text-6xl font-bold mb-16 tracking-tighter">Selected Works</h2>
+                <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-12 sm:mb-16 tracking-tighter">
+                    Selected <span className="gradient-text">Works</span>
+                </h2>
 
-                <div className="grid grid-cols-1 gap-12">
+                <div className="grid grid-cols-1 gap-5 sm:gap-6">
                     {projects.map((project, index) => (
                         <motion.div
                             key={project.id}
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ delay: index * 0.1 }}
+                            transition={{ delay: index * 0.08 }}
                             viewport={{ once: true }}
-                            className="group relative bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:border-white/30 transition-all duration-300 p-8 md:p-12"
                         >
-                            <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
-                                <div className="flex-1">
-                                    <div className="flex items-center gap-4 mb-4">
-                                        <h3 className="text-3xl font-bold">{project.title}</h3>
-                                        <span className="text-xs border border-white/20 px-2 py-1 rounded-full text-gray-400">{project.year}</span>
+                            <Card className="gradient-border group hover:shadow-xl hover:scale-[1.005] transition-all duration-300">
+                                <CardHeader>
+                                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                                        <div className="flex flex-wrap items-center gap-3">
+                                            <CardTitle className="text-xl sm:text-2xl md:text-3xl">
+                                                {project.title}
+                                            </CardTitle>
+                                            <Badge variant="outline" className="font-mono text-xs">
+                                                {project.year}
+                                            </Badge>
+                                        </div>
+                                        <Button asChild className="gradient-btn rounded-full w-fit cursor-pointer">
+                                            <Link href={project.link} target="_blank" rel="noopener noreferrer">
+                                                <span>View on GitHub →</span>
+                                            </Link>
+                                        </Button>
                                     </div>
-                                    <p className="text-sm text-blue-400 uppercase tracking-widest mb-4 font-bold">{project.category}</p>
-                                    <p className="text-gray-300 text-lg leading-relaxed mb-6 max-w-2xl">{project.description}</p>
-
+                                    <CardDescription className="gradient-text font-bold uppercase tracking-widest text-xs sm:text-sm !mt-1">
+                                        {project.category}
+                                    </CardDescription>
+                                </CardHeader>
+                                <CardContent className="space-y-4">
+                                    <p className="text-muted-foreground text-sm sm:text-base md:text-lg leading-relaxed max-w-3xl">
+                                        {project.description}
+                                    </p>
+                                    <Separator />
                                     <div className="flex flex-wrap gap-2">
                                         {project.tech.map(t => (
-                                            <span key={t} className="text-xs font-mono bg-white/10 px-2 py-1 rounded text-gray-300">
+                                            <Badge key={t} variant="secondary" className="font-mono text-xs">
                                                 {t}
-                                            </span>
+                                            </Badge>
                                         ))}
                                     </div>
-                                </div>
-
-                                <div className="md:w-1/3 flex flex-col items-start md:items-end gap-4 mt-6 md:mt-0">
-                                    <Link href={project.link} target="_blank" rel="noopener noreferrer">
-                                        <button className="px-6 py-2 bg-white text-black font-medium rounded-full hover:bg-gray-200 transition-colors cursor-pointer">
-                                            View Project
-                                        </button>
-                                    </Link>
-                                </div>
-                            </div>
+                                </CardContent>
+                            </Card>
                         </motion.div>
                     ))}
                 </div>

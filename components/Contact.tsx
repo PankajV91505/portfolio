@@ -2,6 +2,11 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 
 export default function Contact() {
     const [formData, setFormData] = useState({
@@ -35,97 +40,104 @@ export default function Contact() {
     };
 
     return (
-        <section id="contact" className="py-24 bg-neutral-900 text-white px-6 md:px-12 border-t border-white/5">
+        <section id="contact" className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 md:px-12 bg-muted/30 border-t border-border">
             <div className="max-w-4xl mx-auto">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-center mb-16"
+                    className="text-center mb-12 sm:mb-16"
                 >
-                    <h2 className="text-4xl md:text-6xl font-bold mb-4 tracking-tighter">Get in Touch</h2>
-                    <p className="text-gray-400 text-lg">Have a project in mind? Let's build something together.</p>
+                    <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 tracking-tighter">
+                        Get in <span className="gradient-text">Touch</span>
+                    </h2>
+                    <p className="text-muted-foreground text-base sm:text-lg">
+                        Have a project in mind? Let&apos;s build something together.
+                    </p>
                 </motion.div>
 
-                <motion.form
+                <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.2 }}
-                    onSubmit={handleSubmit}
-                    className="space-y-6 bg-black/50 p-8 md:p-12 rounded-2xl border border-white/10"
                 >
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                            <label htmlFor="name" className="text-sm font-medium text-gray-300">Name</label>
-                            <input
-                                type="text"
-                                id="name"
-                                required
-                                value={formData.name}
-                                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-white/30 transition-colors"
-                                placeholder="Your Name"
-                            />
-                        </div>
-                        <div className="space-y-2">
-                            <label htmlFor="email" className="text-sm font-medium text-gray-300">Email</label>
-                            <input
-                                type="email"
-                                id="email"
-                                required
-                                value={formData.email}
-                                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-white/30 transition-colors"
-                                placeholder="pankaj@example.com"
-                            />
-                        </div>
-                    </div>
+                    <Card className="gradient-border">
+                        <CardHeader>
+                            <CardTitle className="gradient-text text-lg">Send a Message</CardTitle>
+                            <CardDescription>Fill in the form below and I&apos;ll get back to you.</CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            <form onSubmit={handleSubmit} className="space-y-5">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div className="space-y-2">
+                                        <label htmlFor="name" className="text-sm font-medium text-foreground">Name</label>
+                                        <Input
+                                            type="text"
+                                            id="name"
+                                            required
+                                            value={formData.name}
+                                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                            placeholder="Your Name"
+                                            className="focus-visible:ring-primary"
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label htmlFor="email" className="text-sm font-medium text-foreground">Email</label>
+                                        <Input
+                                            type="email"
+                                            id="email"
+                                            required
+                                            value={formData.email}
+                                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                            placeholder="pankaj@example.com"
+                                            className="focus-visible:ring-primary"
+                                        />
+                                    </div>
+                                </div>
 
-                    <div className="space-y-2">
-                        <label htmlFor="message" className="text-sm font-medium text-gray-300">Message</label>
-                        <textarea
-                            id="message"
-                            required
-                            rows={6}
-                            value={formData.message}
-                            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                            className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-white/30 transition-colors resize-none"
-                            placeholder="Tell me about your project..."
-                        />
-                    </div>
+                                <div className="space-y-2">
+                                    <label htmlFor="message" className="text-sm font-medium text-foreground">Message</label>
+                                    <Textarea
+                                        id="message"
+                                        required
+                                        rows={6}
+                                        value={formData.message}
+                                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                                        placeholder="Tell me about your project..."
+                                        className="resize-none focus-visible:ring-primary"
+                                    />
+                                </div>
 
-                    <button
-                        type="submit"
-                        disabled={status === 'loading'}
-                        className={`w-full py-4 rounded-lg font-bold text-lg transition-all ${status === 'loading'
-                            ? 'bg-gray-600 cursor-wait'
-                            : 'bg-white text-black hover:bg-gray-200'
-                            }`}
-                    >
-                        {status === 'loading' ? 'Sending...' : 'Send Message'}
-                    </button>
+                                <Button
+                                    type="submit"
+                                    disabled={status === 'loading'}
+                                    className={`w-full gradient-btn rounded-lg text-base sm:text-lg py-5 sm:py-6 cursor-pointer font-bold ${status === 'loading' ? 'opacity-60 cursor-wait' : 'hover:scale-[1.01]'
+                                        }`}
+                                    size="lg"
+                                >
+                                    <span>{status === 'loading' ? 'Sending...' : 'Send Message ✨'}</span>
+                                </Button>
 
-                    {status === 'success' && (
-                        <motion.p
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            className="text-center text-green-400 font-medium"
-                        >
-                            Message sent successfully! I'll get back to you soon.
-                        </motion.p>
-                    )}
+                                {status === 'success' && (
+                                    <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="flex justify-center">
+                                        <Badge variant="outline" className="text-green-500 border-green-500/30 px-4 py-2 text-sm">
+                                            ✅ Message sent successfully!
+                                        </Badge>
+                                    </motion.div>
+                                )}
 
-                    {status === 'error' && (
-                        <motion.p
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            className="text-center text-red-400 font-medium"
-                        >
-                            Something went wrong. Please try again or email me directly.
-                        </motion.p>
-                    )}
-                </motion.form>
+                                {status === 'error' && (
+                                    <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="flex justify-center">
+                                        <Badge variant="outline" className="text-red-500 border-red-500/30 px-4 py-2 text-sm">
+                                            ❌ Something went wrong. Please try again.
+                                        </Badge>
+                                    </motion.div>
+                                )}
+                            </form>
+                        </CardContent>
+                    </Card>
+                </motion.div>
             </div>
         </section>
     );
